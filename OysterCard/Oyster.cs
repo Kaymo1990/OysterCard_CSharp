@@ -15,5 +15,12 @@ namespace OysterCard
         }
 
         public double oysterBalance { get => balance; set => balance = value; }
+
+        public double TopUp(double amount)
+        {
+            this.oysterBalance += amount;
+            return oysterBalance;
+        }
     }
+
 }
