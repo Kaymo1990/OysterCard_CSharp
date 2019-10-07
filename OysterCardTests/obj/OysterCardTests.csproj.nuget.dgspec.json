@@ -1,0 +1,87 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCardTests\\OysterCardTests.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCardTests\\OysterCardTests.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCardTests\\OysterCardTests.csproj",
+        "projectName": "OysterCardTests",
+        "projectPath": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCardTests\\OysterCardTests.csproj",
+        "packagesPath": "C:\\Users\\Kay\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCardTests\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Kay\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp2.2"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp2.2": {
+            "projectReferences": {
+              "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCard\\OysterCard.csproj": {
+                "projectPath": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCard\\OysterCard.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp2.2": {
+          "dependencies": {
+            "Microsoft.NET.Test.Sdk": {
+              "target": "Package",
+              "version": "[15.9.0, )"
+            },
+            "Microsoft.NETCore.App": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.2.0, )",
+              "autoReferenced": true
+            },
+            "NUnit3TestAdapter": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            },
+            "nunit": {
+              "target": "Package",
+              "version": "[3.11.0, )"
+            }
+          },
+          "imports": [
+            "net461"
+          ],
+          "assetTargetFallback": true,
+          "warn": true
+        }
+      }
+    },
+    "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCard\\OysterCard.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCard\\OysterCard.csproj",
+        "projectName": "OysterCard",
+        "projectPath": "C:\\Users\\Kay\\source\\repos\\OysterCard\\OysterCard\\OysterCard.csproj"
+      },
+      "frameworks": {
+        "net472": {}
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+C:\Users\Kay\source\repos\OysterCard\OysterCard\bin\Debug\OysterCard.exe.config
+C:\Users\Kay\source\repos\OysterCard\OysterCard\bin\Debug\OysterCard.exe
+C:\Users\Kay\source\repos\OysterCard\OysterCard\bin\Debug\OysterCard.pdb
+C:\Users\Kay\source\repos\OysterCard\OysterCard\obj\Debug\OysterCard.csprojAssemblyReference.cache
+C:\Users\Kay\source\repos\OysterCard\OysterCard\obj\Debug\OysterCard.csproj.CoreCompileInputs.cache
+C:\Users\Kay\source\repos\OysterCard\OysterCard\obj\Debug\OysterCard.exe
+C:\Users\Kay\source\repos\OysterCard\OysterCard\obj\Debug\OysterCard.pdb
