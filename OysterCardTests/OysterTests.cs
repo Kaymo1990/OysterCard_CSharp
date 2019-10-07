@@ -24,5 +24,10 @@ namespace Tests
         {
             Assert.AreEqual(20.00, oysterCard.TopUp(10.00));
         }
+        [Test]
+        public void MaxOysterLimit_Returns90_WhenCalled()
+        {
+            Assert.AreEqual(90.00, oysterCard.maxOysterLimit);
+        }
     }
 }
