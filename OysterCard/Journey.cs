@@ -9,14 +9,13 @@ namespace OysterCard
     public class Journey
     {
         public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
-        public int journeyID = 1;
-        public bool InJourney()
+        public bool InJourney(JourneyLog journeyLog)
         {
-            if (journeyHistory.Count == 0)
+            if (journeyLog.journeyHistory.Count == 0)
             {
                 return false;
             }
-            if ($"{journeyHistory.ElementAt(journeyHistory.Count - 1).Key}" == $"Entry Station{journeyID}:")
+            if ($"{journeyLog.journeyHistory.ElementAt(journeyLog.journeyHistory.Count - 1).Key}" == $"Entry Station{journeyLog.journeyID}:")
             {
                 return true;
             }
@@ -26,36 +25,11 @@ namespace OysterCard
             }
         }
 
-        public void UpdateJourneyEntry(string entryJourneyStation)
-        {
-            if(InJourney() == true)
-            {
-                journeyID++;
-            }
-            journeyHistory.Add(new KeyValuePair<string, string>($"Entry Station{journeyID}:", entryJourneyStation));
-        }
-
-        public void UpdateJourneyExit(string exitJourneyStation)
-        {
-            journeyHistory.Add(new KeyValuePair<string, string>($"Exit Station{journeyID}:", exitJourneyStation));
-            journeyID++;
-        }
-
-        public string ReturnFullJourney()
-        {
-            var fullJourney = "";
-            foreach (KeyValuePair<string, string> journey in journeyHistory)
-            {
-                fullJourney += $"{ journey.Key } { journey.Value }{Environment.NewLine}";
-            }
-            return fullJourney;
-        }
-
-        public bool JourneyIncomplete(string touchType)
+        public bool JourneyIncomplete(string touchType, JourneyLog journeyLog)
         {
             if(touchType == "In")
             {
-                if (InJourney() == true)
+                if (InJourney(journeyLog) == true)
                 {
                     return true;
                 }
@@ -63,7 +37,7 @@ namespace OysterCard
 
             if (touchType == "Out")
             {
-                if (InJourney() == false)
+                if (InJourney(journeyLog) == false)
                 {
                     return true;
                 }

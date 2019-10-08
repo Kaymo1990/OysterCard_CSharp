@@ -24,7 +24,7 @@ namespace OysterCard
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
         public double penaltyFare { get => penaltyCharge; set => penaltyCharge = value; }
 
-        public Journey journey = new Journey();
+        public JourneyLog journeyLog = new JourneyLog(new Journey());
 
         public double TopUp(double amount)
         {
@@ -45,17 +45,17 @@ namespace OysterCard
             }
 
 
-            if (journey.JourneyIncomplete("In"))
+            if (journeyLog.JourneyIncomplete("In"))
             {
                 Deduct(penaltyFare);
             }
 
-            journey.UpdateJourneyEntry(entryStation);
+            journeyLog.StartEntryJourney(entryStation);
         }
 
         public void TouchOut(string exitStation)
         {
-            if (journey.JourneyIncomplete("Out"))
+            if (journeyLog.JourneyIncomplete("Out"))
             {
                 Deduct(penaltyFare);
             }
@@ -64,20 +64,13 @@ namespace OysterCard
             {
                 Deduct(minCharge);
             }
-            journey.UpdateJourneyExit(exitStation);
+            journeyLog.FinishExitJourney(exitStation);
         }
 
         public string ReturnFullJourney()
         {
-            return journey.ReturnFullJourney();
+            return journeyLog.ReturnFullJourney();
         }
-
-        public IDictionary<string, string> JourneyHistory()
-        {
-            return journey.journeyHistory;
-        }
-
-
 
         private double Deduct(double amount)
         {

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Journey.cs" />
+    <Compile Include="JourneyLog.cs" />
     <Compile Include="Station.cs" />
     <Compile Include="Oyster.cs" />
     <Compile Include="Program.cs" />
