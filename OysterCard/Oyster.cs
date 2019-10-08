@@ -46,8 +46,8 @@ namespace OysterCard
 
         public void TouchOut(string exitStation)
         {
-            Deduct(minCharge);
             journey.UpdateJourneyExit(exitStation);
+            Deduct(minCharge);
         }
 
         public string ReturnFullJourney()

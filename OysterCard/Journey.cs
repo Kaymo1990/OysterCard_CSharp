@@ -41,5 +41,26 @@ namespace OysterCard
             }
             return fullJourney;
         }
+
+        public bool JourneyIncomplete(string touchType)
+        {
+            if(touchType == "In")
+            {
+                if (journeyHistory.ElementAt(journeyHistory.Count - 1).Key.ToString() == "Entry Station:")
+                {
+                    return true;
+                }
+            }
+
+            if (touchType == "Out")
+            {
+                if (journeyHistory.ElementAt(journeyHistory.Count - 1).Key.ToString() == "Exit Station:")
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }

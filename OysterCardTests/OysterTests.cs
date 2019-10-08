@@ -94,6 +94,22 @@ namespace Tests
         }
 
         [Test]
+        public void JourneyIncomplete_IsTrue_WhenTouchingInWhileIn()
+        {
+            var journey = new Journey();
+            journey.UpdateJourneyEntry("Test");
+            Assert.IsTrue(journey.JourneyIncomplete("In"));
+        }
+
+        [Test]
+        public void JourneyIncomplete_IsTrue_WhenTouchingOutWhileOut()
+        {
+            var journey = new Journey();
+            journey.UpdateJourneyExit("Test");
+            Assert.IsTrue(journey.JourneyIncomplete("Out"));
+        }
+
+        [Test]
         public void OysterJourney_HasNoJourneys_ByDefault()
         {
             Assert.AreEqual(0, oysterCard.journeyHistory().Count);
