@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OysterCard
 {
-    class Journey
+    public class Journey
     {
         public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
 

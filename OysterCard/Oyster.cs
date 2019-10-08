@@ -22,7 +22,7 @@ namespace OysterCard
         public double maxOysterLimit { get => maxLimit; set => maxLimit = value; }
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
 
-        public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
+        public Journey journey = new Journey();
 
         public double TopUp(double amount)
         {
@@ -41,46 +41,26 @@ namespace OysterCard
             {
                 throw new Exception("You don't have the minimum balance of 1.00 GBP");
             }
-            UpdateJourneyEntry(entryStation);
+            journey.UpdateJourneyEntry(entryStation);
         }
 
         public void TouchOut(string exitStation)
         {
             Deduct(minCharge);
-            UpdateJourneyExit(exitStation);
-        }
-
-        public bool InJourney()
-        {
-            if ($"{journeyHistory.ElementAt(journeyHistory.Count - 1).Key}" == "Entry Station:")
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        public void UpdateJourneyEntry(string entryJourneyStation)
-        {
-            journeyHistory.Add(new KeyValuePair<string, string>("Entry Station:", entryJourneyStation));
-        }
-
-        public void UpdateJourneyExit(string exitJourneyStation)
-        {
-            journeyHistory.Add(new KeyValuePair<string, string>("Exit Station:", exitJourneyStation));
+            journey.UpdateJourneyExit(exitStation);
         }
 
         public string ReturnFullJourney()
         {
-            var fullJourney = "";
-            foreach (KeyValuePair<string, string> journey in journeyHistory)
-            {
-                fullJourney += $"{ journey.Key } { journey.Value }{Environment.NewLine}";
-            }
-            return fullJourney;
+            return journey.ReturnFullJourney();
         }
+
+        public IDictionary<string, string> journeyHistory()
+        {
+            return journey.journeyHistory;
+        }
+
+
 
         private double Deduct(double amount)
         {

@@ -53,7 +53,7 @@ namespace Tests
         {
             var expectedOutput = "Entry Station:";
             oysterCard.TouchIn("Test");
-            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Key}");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Key}");
         }
 
         [Test]
@@ -61,14 +61,14 @@ namespace Tests
         {
             var expectedOutput = "Test";
             oysterCard.TouchIn("Test");
-            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Value}");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Value}");
         }
 
         [Test]
         public void InOysterJourney_IsTrue_WhenTouchedIn()
         {
             oysterCard.TouchIn("Test");
-            Assert.IsTrue(oysterCard.InJourney());
+            Assert.IsTrue(oysterCard.journey.InJourney());
         }
 
         [Test]
@@ -76,7 +76,7 @@ namespace Tests
         {
             oysterCard.TouchIn("Test");
             oysterCard.TouchOut("Test1");
-            Assert.IsFalse(oysterCard.InJourney());
+            Assert.IsFalse(oysterCard.journey.InJourney());
         }
 
         [Test]
@@ -90,13 +90,13 @@ namespace Tests
         public void TouchIn_UpdatesEntryStation_WhenTouchIn()
         {
             oysterCard.TouchIn("Test station");
-            Assert.AreEqual("Test station", oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Value.ToString());
+            Assert.AreEqual("Test station", oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Value.ToString());
         }
 
         [Test]
         public void OysterJourney_HasNoJourneys_ByDefault()
         {
-            Assert.AreEqual(0, oysterCard.journeyHistory.Count);
+            Assert.AreEqual(0, oysterCard.journeyHistory().Count);
         }
 
         [Test]
