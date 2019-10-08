@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,7 +26,7 @@ namespace OysterCard
         public string entryJourneyStation { get => entryStation; set => entryStation = value; }
         public string exitJourneyStation { get => exitStation; set => exitStation = value; }
 
-        public Hashtable journeyHistory = new Hashtable();
+        public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
 
         public double TopUp(double amount)
         {
@@ -70,13 +71,24 @@ namespace OysterCard
 
         public void UpdateJourneyEntry()
         {
-            journeyHistory.Add("Entry Station:", $"{entryJourneyStation}");
+            journeyHistory.Add(new KeyValuePair<string, string>("Entry Station:", entryJourneyStation));
         }
 
         public void UpdateJourneyExit()
         {
-            journeyHistory.Add("Exit Station:", $"{exitJourneyStation}");
+            journeyHistory.Add(new KeyValuePair<string, string>("Exit Station:", exitJourneyStation));
         }
+
+        public string ReturnFullJourney()
+        {
+            var fullJourney = "";
+            foreach (KeyValuePair<string, string> journey in journeyHistory)
+            {
+                fullJourney += $"{ journey.Key } { journey.Value }{Environment.NewLine}";
+            }
+            return fullJourney;
+        }
+
         private double Deduct(double amount)
         {
             oysterBalance -= amount;

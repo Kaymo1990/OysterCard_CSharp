@@ -1,6 +1,8 @@
 using NUnit.Framework;
 using OysterCard;
 using System;
+using System.Collections.Specialized;
+using System.Collections;
 
 namespace Tests
 {
@@ -78,6 +80,30 @@ namespace Tests
         public void OysterJourney_HasNoJourneys_ByDefault()
         {
             Assert.AreEqual(0, oysterCard.journeyHistory.Count);
+        }
+
+        [Test]
+        public void OysterJourney_HasEntryStationAsKey_WhenTestPassedAsEntry()
+        {
+            var expectedOutput = "Entry Station: Test" + Environment.NewLine;
+            oysterCard.TouchIn("Test");
+            Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
+        }
+        [Test]
+        public void OysterJourney_HasTestAsValue_WhenTestPassedAsEntry()
+        {
+            var expectedOutput = "Exit Station: Test" + Environment.NewLine;
+            oysterCard.TouchOut("Test");
+            Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
+        }
+
+        [Test]
+        public void OysterJourney_HasTestAsEntryTest1AsExit_WhenCalled()
+        {
+            var expectedOutput = "Entry Station: Test" + Environment.NewLine + "Exit Station: Test1" + Environment.NewLine;
+            oysterCard.TouchIn("Test");
+            oysterCard.TouchOut("Test1");
+            Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
         }
     }
 }
