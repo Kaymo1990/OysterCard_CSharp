@@ -9,10 +9,14 @@ namespace OysterCard
     public class Journey
     {
         public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
-
+        public int journeyID = 1;
         public bool InJourney()
         {
-            if ($"{journeyHistory.ElementAt(journeyHistory.Count - 1).Key}" == "Entry Station:")
+            if (journeyHistory.Count == 0)
+            {
+                return false;
+            }
+            if ($"{journeyHistory.ElementAt(journeyHistory.Count - 1).Key}" == $"Entry Station{journeyID}:")
             {
                 return true;
             }
@@ -24,12 +28,17 @@ namespace OysterCard
 
         public void UpdateJourneyEntry(string entryJourneyStation)
         {
-            journeyHistory.Add(new KeyValuePair<string, string>("Entry Station:", entryJourneyStation));
+            if(InJourney() == true)
+            {
+                journeyID++;
+            }
+            journeyHistory.Add(new KeyValuePair<string, string>($"Entry Station{journeyID}:", entryJourneyStation));
         }
 
         public void UpdateJourneyExit(string exitJourneyStation)
         {
-            journeyHistory.Add(new KeyValuePair<string, string>("Exit Station:", exitJourneyStation));
+            journeyHistory.Add(new KeyValuePair<string, string>($"Exit Station{journeyID}:", exitJourneyStation));
+            journeyID++;
         }
 
         public string ReturnFullJourney()

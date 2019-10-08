@@ -41,19 +41,20 @@ namespace Tests
         }
 
         [Test]
-        public void OysterDeduct_Deducts5GBP_WhenPassed5()
+        public void OysterDeduct_Deducts1GBP_WhenTappingOut()
         {
-            oysterCard.oysterBalance = 6.0;
+            
+            oysterCard.TouchIn("Test");
             oysterCard.TouchOut("Test1");
-            Assert.AreEqual(5, oysterCard.oysterBalance);
+            Assert.AreEqual(9, oysterCard.oysterBalance);
         }
 
         [Test]
         public void JourneyHistory_HasKeyOfEntryStation_WhenTappedIn()
         {
-            var expectedOutput = "Entry Station:";
+            var expectedOutput = "Entry Station1:";
             oysterCard.TouchIn("Test");
-            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Key}");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.JourneyHistory().ElementAt(oysterCard.JourneyHistory().Count - 1).Key}");
         }
 
         [Test]
@@ -61,7 +62,7 @@ namespace Tests
         {
             var expectedOutput = "Test";
             oysterCard.TouchIn("Test");
-            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Value}");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.JourneyHistory().ElementAt(oysterCard.JourneyHistory().Count - 1).Value}");
         }
 
         [Test]
@@ -90,7 +91,7 @@ namespace Tests
         public void TouchIn_UpdatesEntryStation_WhenTouchIn()
         {
             oysterCard.TouchIn("Test station");
-            Assert.AreEqual("Test station", oysterCard.journeyHistory().ElementAt(oysterCard.journeyHistory().Count - 1).Value.ToString());
+            Assert.AreEqual("Test station", oysterCard.JourneyHistory().ElementAt(oysterCard.JourneyHistory().Count - 1).Value.ToString());
         }
 
         [Test]
@@ -112,20 +113,20 @@ namespace Tests
         [Test]
         public void OysterJourney_HasNoJourneys_ByDefault()
         {
-            Assert.AreEqual(0, oysterCard.journeyHistory().Count);
+            Assert.AreEqual(0, oysterCard.JourneyHistory().Count);
         }
 
         [Test]
         public void OysterJourney_HasEntryStationAsKey_WhenTestPassedAsEntry()
         {
-            var expectedOutput = "Entry Station: Test" + Environment.NewLine;
+            var expectedOutput = "Entry Station1: Test" + Environment.NewLine;
             oysterCard.TouchIn("Test");
             Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
         }
         [Test]
         public void OysterJourney_HasTestAsValue_WhenTestPassedAsEntry()
         {
-            var expectedOutput = "Exit Station: Test" + Environment.NewLine;
+            var expectedOutput = "Exit Station1: Test" + Environment.NewLine;
             oysterCard.TouchOut("Test");
             Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
         }
@@ -133,7 +134,7 @@ namespace Tests
         [Test]
         public void OysterJourney_HasTestAsEntryTest1AsExit_WhenCalled()
         {
-            var expectedOutput = "Entry Station: Test" + Environment.NewLine + "Exit Station: Test1" + Environment.NewLine;
+            var expectedOutput = "Entry Station1: Test" + Environment.NewLine + "Exit Station1: Test1" + Environment.NewLine;
             oysterCard.TouchIn("Test");
             oysterCard.TouchOut("Test1");
             Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());

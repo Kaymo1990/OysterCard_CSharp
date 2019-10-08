@@ -44,6 +44,7 @@ namespace OysterCard
                 throw new Exception("You don't have the minimum balance of 1.00 GBP");
             }
 
+
             if (journey.JourneyIncomplete("In"))
             {
                 Deduct(penaltyFare);
@@ -58,8 +59,12 @@ namespace OysterCard
             {
                 Deduct(penaltyFare);
             }
+
+            else
+            {
+                Deduct(minCharge);
+            }
             journey.UpdateJourneyExit(exitStation);
-            Deduct(minCharge);
         }
 
         public string ReturnFullJourney()
@@ -67,7 +72,7 @@ namespace OysterCard
             return journey.ReturnFullJourney();
         }
 
-        public IDictionary<string, string> journeyHistory()
+        public IDictionary<string, string> JourneyHistory()
         {
             return journey.journeyHistory;
         }
