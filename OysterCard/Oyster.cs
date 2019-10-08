@@ -37,7 +37,7 @@ namespace OysterCard
         }
 
 
-        public void TouchIn(string entryStation)
+        public void TouchIn(Station entryStation)
         {
             if (oysterBalance < 1.00)
             {
@@ -53,7 +53,7 @@ namespace OysterCard
             journeyLog.StartEntryJourney(entryStation);
         }
 
-        public void TouchOut(string exitStation)
+        public void TouchOut(Station exitStation)
         {
             if (journeyLog.JourneyIncomplete("Out"))
             {
@@ -70,6 +70,13 @@ namespace OysterCard
         public string ReturnFullJourney()
         {
             return journeyLog.ReturnFullJourney();
+        }
+
+        private double CalcFare()
+        {
+            double entryZone = journeyLog.journeyHistory.ElementAt(journeyLog.journeyHistory.Count - 2).Value.stationZone;
+            double exitZone = journeyLog.journeyHistory.ElementAt(journeyLog.journeyHistory.Count - 1).Value.stationZone;
+            return (minCharge + Math.Abs(entryZone - exitZone));
         }
 
         private double Deduct(double amount)

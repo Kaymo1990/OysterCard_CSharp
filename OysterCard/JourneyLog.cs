@@ -14,31 +14,31 @@ namespace OysterCard
         }
 
         public int journeyID = 1;
-        public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
+        public IDictionary<string, Station> journeyHistory = new Dictionary<string, Station>();
 
         public Journey journey { get; }
 
-        public void StartEntryJourney(string entryJourneyStation)
+        public void StartEntryJourney(Station entryJourneyStation)
         {
             if(InJourney() == true)
             {
                 journeyID++;
             }
-            journeyHistory.Add(new KeyValuePair<string, string>($"Entry Station{journeyID}:", entryJourneyStation));
+            journeyHistory.Add(new KeyValuePair<string, Station>($"Entry Station{journeyID}:", entryJourneyStation));
         }
 
-        public void FinishExitJourney(string exitJourneyStation)
+        public void FinishExitJourney(Station exitJourneyStation)
         {
-            journeyHistory.Add(new KeyValuePair<string, string>($"Exit Station{journeyID}:", exitJourneyStation));
+            journeyHistory.Add(new KeyValuePair<string, Station>($"Exit Station{journeyID}:", exitJourneyStation));
             journeyID++;
         }
 
         public string ReturnFullJourney()
         {
             var fullJourney = "";
-            foreach (KeyValuePair<string, string> journey in journeyHistory)
+            foreach (KeyValuePair<string, Station> journey in journeyHistory)
             {
-                fullJourney += $"{ journey.Key } { journey.Value }{Environment.NewLine}";
+                fullJourney += $"{ journey.Key } { journey.Value.stationName }{Environment.NewLine}";
             }
             return fullJourney;
         }
