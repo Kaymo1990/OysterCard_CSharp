@@ -13,6 +13,7 @@ namespace OysterCard
         private double balance;
         private double maxLimit = 90.00;
         private double minimumCharge = 1.00;
+        private double penaltyCharge = 6.00;
         public Oyster(double _balance)
         {
             balance = _balance;
@@ -21,6 +22,7 @@ namespace OysterCard
         public double oysterBalance { get => balance; set => balance = value; }
         public double maxOysterLimit { get => maxLimit; set => maxLimit = value; }
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
+        public double penaltyFare { get => penaltyCharge; set => penaltyCharge = value; }
 
         public Journey journey = new Journey();
 
@@ -41,11 +43,21 @@ namespace OysterCard
             {
                 throw new Exception("You don't have the minimum balance of 1.00 GBP");
             }
+
+            if (journey.JourneyIncomplete("In"))
+            {
+                Deduct(penaltyFare);
+            }
+
             journey.UpdateJourneyEntry(entryStation);
         }
 
         public void TouchOut(string exitStation)
         {
+            if (journey.JourneyIncomplete("Out"))
+            {
+                Deduct(penaltyFare);
+            }
             journey.UpdateJourneyExit(exitStation);
             Deduct(minCharge);
         }
