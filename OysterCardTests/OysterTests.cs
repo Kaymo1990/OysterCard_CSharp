@@ -41,7 +41,7 @@ namespace Tests
         public void OysterDeduct_Deducts5GBP_WhenPassed5()
         {
             oysterCard.oysterBalance = 6.0;
-            oysterCard.TouchOut();
+            oysterCard.TouchOut("Test1");
             Assert.AreEqual(5, oysterCard.oysterBalance);
         }
 
@@ -56,7 +56,7 @@ namespace Tests
         public void InOysterJourney_IsFalse_WhenTouchedOut()
         {
             oysterCard.TouchIn("Test");
-            oysterCard.TouchOut();
+            oysterCard.TouchOut("Test1");
             Assert.IsFalse(oysterCard.InJourney());
         }
 
@@ -72,6 +72,12 @@ namespace Tests
         {
             oysterCard.TouchIn("Test station");
             Assert.AreEqual("Test station", oysterCard.entryJourneyStation);
+        }
+
+        [Test]
+        public void OysterJourney_HasNoJourneys_ByDefault()
+        {
+            Assert.AreEqual(0, oysterCard.journeyHistory.Count);
         }
     }
 }
