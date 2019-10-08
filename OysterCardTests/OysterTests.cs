@@ -183,5 +183,15 @@ namespace Tests
             var expectedOutput = "Entry Station2:";
             Assert.AreEqual(expectedOutput, oysterCard.journeyLog.journeyHistory.ElementAt(oysterCard.journeyLog.journeyHistory.Count - 1).Key.ToString());
         }
+
+        [Test]
+        public void OysterFare_Returns3_WhenPassedZone1And3()
+        {
+            var station1 = new Station("Test", 1);
+            var station2 = new Station("Test1", 3);
+            oysterCard.TouchIn(station1);
+            oysterCard.TouchOut(station2);
+            Assert.AreEqual(3.00, oysterCard.ExposeCalcFare());
+        }
     }
 }

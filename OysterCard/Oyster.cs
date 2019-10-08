@@ -72,6 +72,11 @@ namespace OysterCard
             return journeyLog.ReturnFullJourney();
         }
 
+        public double ExposeCalcFare()
+        {
+            return CalcFare();
+        }
+
         private double CalcFare()
         {
             double entryZone = journeyLog.journeyHistory.ElementAt(journeyLog.journeyHistory.Count - 2).Value.stationZone;
