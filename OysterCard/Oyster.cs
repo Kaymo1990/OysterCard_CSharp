@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,6 +22,8 @@ namespace OysterCard
         public double maxOysterLimit { get => maxLimit; set => maxLimit = value; }
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
         public string entryJourneyStation { get => entryStation; set => entryStation = value; }
+
+        public Hashtable journeyHistory = new Hashtable();
 
         public double TopUp(double amount)
         {
