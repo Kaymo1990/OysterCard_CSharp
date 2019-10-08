@@ -3,6 +3,7 @@ using OysterCard;
 using System;
 using System.Collections.Specialized;
 using System.Collections;
+using System.Linq;
 
 namespace Tests
 {
@@ -48,6 +49,22 @@ namespace Tests
         }
 
         [Test]
+        public void JourneyHistory_HasKeyOfEntryStation_WhenTappedIn()
+        {
+            var expectedOutput = "Entry Station:";
+            oysterCard.TouchIn("Test");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Key}");
+        }
+
+        [Test]
+        public void JourneyHistory_HasValueOfTest_WhenTappedIn()
+        {
+            var expectedOutput = "Test";
+            oysterCard.TouchIn("Test");
+            Assert.AreEqual(expectedOutput, $"{oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Value}");
+        }
+
+        [Test]
         public void InOysterJourney_IsTrue_WhenTouchedIn()
         {
             oysterCard.TouchIn("Test");
@@ -73,7 +90,7 @@ namespace Tests
         public void TouchIn_UpdatesEntryStation_WhenTouchIn()
         {
             oysterCard.TouchIn("Test station");
-            Assert.AreEqual("Test station", oysterCard.entryJourneyStation);
+            Assert.AreEqual("Test station", oysterCard.journeyHistory.ElementAt(oysterCard.journeyHistory.Count - 1).Value.ToString());
         }
 
         [Test]
@@ -104,6 +121,20 @@ namespace Tests
             oysterCard.TouchIn("Test");
             oysterCard.TouchOut("Test1");
             Assert.AreEqual(expectedOutput, oysterCard.ReturnFullJourney());
+        }
+
+        [Test]
+        public void NewStation_ShouldHaveZoneOf3_WhenInstantiatedWith3()
+        {
+            var station = new Station("Test", 3);
+            Assert.AreEqual(3, station.stationZone);
+        }
+
+        [Test]
+        public void NewStation_ShouldHaveNameOfTest_WhenInstantiatedWithTest()
+        {
+            var station = new Station("Test", 3);
+            Assert.AreEqual("Test", station.stationName);
         }
     }
 }

@@ -52,13 +52,13 @@ namespace OysterCard
 
         public bool InJourney()
         {
-            if (entryJourneyStation == "")
+            if ($"{journeyHistory.ElementAt(journeyHistory.Count - 1).Key}" == "Entry Station:")
             {
-                return false;
+                return true;
             }
             else
             {
-                return true;
+                return false;
             }
         }
 
