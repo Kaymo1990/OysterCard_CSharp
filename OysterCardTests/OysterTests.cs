@@ -161,12 +161,23 @@ namespace Tests
             Assert.AreEqual(4, oysterCard.oysterBalance);
         }
 
+        [Test]
         public void JourneyIncompleteTappingOut_AppliesPenaltyCharge_OysterBalanceDeductedby6()
         {
             oysterCard.TouchIn("Test");
             oysterCard.TouchOut("Test2");
             oysterCard.TouchOut("Test3");
             Assert.AreEqual(3, oysterCard.oysterBalance);
+        }
+
+        [Test]
+        public void JourneyIncomplete_UpdatesEntryStationIDto2IfIn_EntryStationIDIs2()
+        {
+            oysterCard.TouchIn("Test1");
+            oysterCard.TouchIn("Test2");
+
+            var expectedOutput = "Entry Station2:";
+            Assert.AreEqual(expectedOutput, oysterCard.journey.journeyHistory.ElementAt(oysterCard.journey.journeyHistory.Count - 1).Key.ToString());
         }
     }
 }
