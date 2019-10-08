@@ -152,5 +152,20 @@ namespace Tests
             var station = new Station("Test", 3);
             Assert.AreEqual("Test", station.stationName);
         }
+        [Test]
+        public void JourneyIncompleteTappingIn_AppliesPenaltyCharge_OysterBalanceDeductedby6()
+        {
+            oysterCard.TouchIn("Test");
+            oysterCard.TouchIn("Test2");
+            Assert.AreEqual(4, oysterCard.oysterBalance);
+        }
+
+        public void JourneyIncompleteTappingOut_AppliesPenaltyCharge_OysterBalanceDeductedby6()
+        {
+            oysterCard.TouchIn("Test");
+            oysterCard.TouchOut("Test2");
+            oysterCard.TouchOut("Test3");
+            Assert.AreEqual(3, oysterCard.oysterBalance);
+        }
     }
 }

@@ -46,7 +46,7 @@ namespace OysterCard
         {
             if(touchType == "In")
             {
-                if (journeyHistory.ElementAt(journeyHistory.Count - 1).Key.ToString() == "Entry Station:")
+                if (InJourney() == true)
                 {
                     return true;
                 }
@@ -54,7 +54,7 @@ namespace OysterCard
 
             if (touchType == "Out")
             {
-                if (journeyHistory.ElementAt(journeyHistory.Count - 1).Key.ToString() == "Exit Station:")
+                if (InJourney() == false)
                 {
                     return true;
                 }
