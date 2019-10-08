@@ -10,7 +10,6 @@ namespace OysterCard
     {
         private double balance;
         private double maxLimit = 90.00;
-        private bool inJourney = false;
         private double minimumCharge = 1.00;
         private string entryStation;
         public Oyster(double _balance)
@@ -20,7 +19,6 @@ namespace OysterCard
 
         public double oysterBalance { get => balance; set => balance = value; }
         public double maxOysterLimit { get => maxLimit; set => maxLimit = value; }
-        public bool inOysterJourney { get => inJourney; set => inJourney = value; }
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
         public string entryJourneyStation { get => entryStation; set => entryStation = value; }
 
@@ -35,21 +33,31 @@ namespace OysterCard
         }
 
 
-        public bool TouchIn()
+        public void TouchIn(string entryStation)
         {
             if (oysterBalance < 1.00)
             {
                 throw new Exception("You don't have the minimum balance of 1.00 GBP");
             }
-            inOysterJourney = true;
-            return inOysterJourney;
+            entryJourneyStation = entryStation;
         }
 
-        public bool TouchOut()
+        public void TouchOut()
         {
             Deduct(minCharge);
-            inOysterJourney = false;
-            return inOysterJourney;
+            entryJourneyStation = "";
+        }
+
+        public bool InJourney()
+        {
+            if (entryJourneyStation == "")
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         private double Deduct(double amount)
         {

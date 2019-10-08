@@ -48,21 +48,30 @@ namespace Tests
         [Test]
         public void InOysterJourney_IsTrue_WhenTouchedIn()
         {
-            Assert.IsTrue(oysterCard.TouchIn());
+            oysterCard.TouchIn("Test");
+            Assert.IsTrue(oysterCard.InJourney());
         }
 
         [Test]
         public void InOysterJourney_IsFalse_WhenTouchedOut()
         {
-            oysterCard.TouchIn();
-            Assert.IsFalse(oysterCard.TouchOut());
+            oysterCard.TouchIn("Test");
+            oysterCard.TouchOut();
+            Assert.IsFalse(oysterCard.InJourney());
         }
 
         [Test]
         public void TouchIn_ThrowsException_WhenBalanceBelow1()
         {
             oysterCard.oysterBalance = 0.5;
-            Assert.Throws<Exception>(() => oysterCard.TouchIn());
+            Assert.Throws<Exception>(() => oysterCard.TouchIn("Test"));
+        }
+
+        [Test]
+        public void TouchIn_UpdatesEntryStation_WhenTouchIn()
+        {
+            oysterCard.TouchIn("Test station");
+            Assert.AreEqual("Test station", oysterCard.entryJourneyStation);
         }
     }
 }
