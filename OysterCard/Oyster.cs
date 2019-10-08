@@ -13,8 +13,6 @@ namespace OysterCard
         private double balance;
         private double maxLimit = 90.00;
         private double minimumCharge = 1.00;
-        private string entryStation = "";
-        private string exitStation = "";
         public Oyster(double _balance)
         {
             balance = _balance;
@@ -23,8 +21,6 @@ namespace OysterCard
         public double oysterBalance { get => balance; set => balance = value; }
         public double maxOysterLimit { get => maxLimit; set => maxLimit = value; }
         public double minCharge { get => minimumCharge; set => minimumCharge = value; }
-        public string entryJourneyStation { get => entryStation; set => entryStation = value; }
-        public string exitJourneyStation { get => exitStation; set => exitStation = value; }
 
         public IDictionary<string, string> journeyHistory = new Dictionary<string, string>();
 
@@ -45,16 +41,13 @@ namespace OysterCard
             {
                 throw new Exception("You don't have the minimum balance of 1.00 GBP");
             }
-            entryJourneyStation = entryStation;
-            UpdateJourneyEntry();
+            UpdateJourneyEntry(entryStation);
         }
 
         public void TouchOut(string exitStation)
         {
             Deduct(minCharge);
-            entryJourneyStation = "";
-            exitJourneyStation = exitStation;
-            UpdateJourneyExit();
+            UpdateJourneyExit(exitStation);
         }
 
         public bool InJourney()
@@ -69,12 +62,12 @@ namespace OysterCard
             }
         }
 
-        public void UpdateJourneyEntry()
+        public void UpdateJourneyEntry(string entryJourneyStation)
         {
             journeyHistory.Add(new KeyValuePair<string, string>("Entry Station:", entryJourneyStation));
         }
 
-        public void UpdateJourneyExit()
+        public void UpdateJourneyExit(string exitJourneyStation)
         {
             journeyHistory.Add(new KeyValuePair<string, string>("Exit Station:", exitJourneyStation));
         }
