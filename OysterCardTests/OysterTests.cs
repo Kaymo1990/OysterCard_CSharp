@@ -40,7 +40,9 @@ namespace Tests
         [Test]
         public void OysterDeduct_Deducts5GBP_WhenPassed5()
         {
-            Assert.AreEqual(5, oysterCard.Deduct(5.00));
+            oysterCard.oysterBalance = 6.0;
+            oysterCard.TouchOut();
+            Assert.AreEqual(5, oysterCard.oysterBalance);
         }
 
         [Test]
@@ -59,7 +61,7 @@ namespace Tests
         [Test]
         public void TouchIn_ThrowsException_WhenBalanceBelow1()
         {
-            oysterCard.Deduct(9.50);
+            oysterCard.oysterBalance = 0.5;
             Assert.Throws<Exception>(() => oysterCard.TouchIn());
         }
     }
